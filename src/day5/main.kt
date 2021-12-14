@@ -3,7 +3,7 @@ package day5
 import readInput
 
 fun main() {
-    val lines =  readInput("day5/input-my") { ofLine(it) }
+    val lines =  readInput("day5/input-ex") { ofLine(it) }
 
     val linesPart1 = lines; //.filter { it.isHorizontal() || it.isVertical() }.toList()
 
@@ -37,7 +37,7 @@ class Line (val p0: V2,  val p1 : V2) {
         if(d == 0) { return listOf(p0) }
         dV /= d
         assert(Math.abs(dV.x + dV.y) == 1)
-        return (0..d).fold(ArrayList()) { acc, i -> acc.add(p0 + (dV * i)); acc }
+        return (0..d).map { i -> p0 + (dV * i) }.toList()
     }
     override fun toString(): String { return "$p0 -> $p1" }
 }

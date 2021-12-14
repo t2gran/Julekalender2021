@@ -4,12 +4,12 @@ import readInput
 import splitLine
 
 fun main() {
-    val input =  readInput("day4/input-my")
+    val input =  readInput("day4/input-ex")
 
     val game = ofGame(input)
 
     println("Part 1:")
-    game.playBingoVariant { it.playBingo(false) }
+    game.playBingoVariant { it.playBingo(true) }
 
     println("Part 2:")
     game.playBingoVariant { it.findLastBingoBoard(true) }
@@ -88,10 +88,8 @@ class Board(val rows : List<List<BingoNumber>>) {
     }
 
     fun sumUnmarkedNumbers() : Int {
-        return rows.flatMap { it }
-            .filter { !it.marked }
-            .map { it.value }
-            .sum() }
+        return rows.flatten().filter { !it.marked }.sumOf { it.value }
+    }
 }
 
 fun ofGame(lines: List<String>): BingoGame {

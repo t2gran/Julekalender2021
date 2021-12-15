@@ -4,13 +4,13 @@ import readInput
 import toIntArray
 
 fun main() {
-    val population : Population = readPopulation("day6/input-my")
+    val population : Population = readPopulation("day6/input-ex")
 
     println("The initial population: $population")
 
     repeat(256) { day ->
         population.swimForADay()
-        println("Population after day ${day+1}: $population, total: ${population.total()}")
+        println("Population after day ${day+1}: ${population.total()}, distribution: $population")
     }
 }
 
@@ -19,7 +19,9 @@ class Population(var ageGroups : LongArray = LongArray(9)) {
     fun total(): Long { return ageGroups.sum() }
     fun swimForADay() {
         val ready = ageGroups[0];
-        (0 until (ageGroups.size-1)).forEach { i -> ageGroups[i] = ageGroups[i+1] }
+        for(i in 0 until ageGroups.size-1) {
+            ageGroups[i] = ageGroups[i+1]
+        }
         ageGroups[8] = ready
         ageGroups[6] += ready
     }
@@ -28,6 +30,5 @@ class Population(var ageGroups : LongArray = LongArray(9)) {
     }
 }
 
-private fun readPopulation(file : String) = toIntArray(
-    readInput(file).first()
-).fold(Population()) { p, i -> p.add(i); p }
+private fun readPopulation(file : String) = toIntArray(readInput(file).first())
+    .fold(Population()) { p, i -> p.add(i); p }

@@ -25,6 +25,10 @@ fun <T> splitLine(line : String, mapping : (String) -> T) : List<T> {
         .toList()
 }
 
+fun toRed(text : String) : String { return "\u001B[31m$text\u001B[0m" }
+fun toRed(value : Int) : String { return toRed(value.toString()) }
+fun bgBlue(value : Int) : String { return "\u001b[37;1m\u001b[44m$value\u001B[0m" }
+
 /**
  * Converts string to md5 hash.
  */

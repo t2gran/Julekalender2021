@@ -25,9 +25,34 @@ fun <T> splitLine(line : String, mapping : (String) -> T) : List<T> {
         .toList()
 }
 
-fun toRed(text : String) : String { return "\u001B[31m$text\u001B[0m" }
-fun toRed(value : Int) : String { return toRed(value.toString()) }
-fun bgBlue(value : Int) : String { return "\u001b[37;1m\u001b[44m$value\u001B[0m" }
+enum class Color(val fg : String,  val bg : String) {
+    Black("30", "40"),
+    BlackLT("30;1", "40;1"),
+    Red("31", "41"),
+    RedLT("31;1", "41;1"),
+    Green("32", "42"),
+    GreenLT("32;1", "42;1"),
+    Yellow("33", "43"),
+    YellowLT("33;1", "43;1"),
+    Blue("34", "44"),
+    BlueLT("34;1", "44;1"),
+    Magenta("35", "45"),
+    MagentaLT("35;1", "45;1"),
+    Cyan("36", "46"),
+    CyanLT("36;1", "46;1"),
+    White("37", "47"),
+    WhiteLT("37;1", "47;1");
+
+    fun fg(text : String) : String { return "\u001B[${fg}m$text\u001B[0m" }
+    fun fg(value : Int) : String { return fg(value.toString()) }
+}
+
+fun color(text : String, fg : Color, bg : Color) : String {
+    return "\u001B[${fg.fg}m\u001B[${bg.bg}m$text\u001B[0m"
+}
+fun color(value : Int, fg : Color, bg : Color) : String {
+    return color(value.toString(), fg, bg)
+}
 
 /**
  * Converts string to md5 hash.

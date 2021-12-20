@@ -1,6 +1,6 @@
 package day9
 
-import bgBlue
+import Color.Blue
 import readInput
 import kotlin.math.min
 
@@ -74,7 +74,7 @@ class Matrix(val width : Int, val height : Int) {
         (0 until height).forEach { y ->
             (0 until width).forEach { x ->
                 val v = get(x, y) % 10
-                buf += if(v == 9) v else bgBlue(v)
+                buf += if(v == 9) v else Blue.fg(v)
             }
             buf += "\n"
         }

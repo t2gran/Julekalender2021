@@ -54,6 +54,13 @@ fun color(value : Int, fg : Color, bg : Color) : String {
     return color(value.toString(), fg, bg)
 }
 
+fun <T> List<T>.toPair(): Pair<T, T> {
+    if (this.size != 2) {
+        throw IllegalArgumentException("List is not of length 2! list: $this")
+    }
+    return Pair(this[0], this[1])
+}
+
 /**
  * Converts string to md5 hash.
  */

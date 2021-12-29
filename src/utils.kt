@@ -61,6 +61,22 @@ fun <T> List<T>.toPair(): Pair<T, T> {
     return Pair(this[0], this[1])
 }
 
+class StopWatch(val name : String) {
+    val startTime = System.currentTimeMillis()
+    var endTime = 0L
+    fun stop() { endTime = System.currentTimeMillis() }
+    fun print() { println("$name ${(endTime - startTime)/1000.0}s") }
+    companion object {
+        fun start(name : String) : StopWatch = StopWatch(name)
+        fun timeAndPrint(name : String, body : () -> Unit) {
+            val s = start(name)
+            body.invoke()
+            s.stop()
+            s.print()
+        }
+    }
+}
+
 /**
  * Converts string to md5 hash.
  */
